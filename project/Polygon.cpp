@@ -153,7 +153,6 @@ bool Segment::Intersects(const Segment& other) const {
         return false;
     }
 
-    // ИСПРАВЛЕННЫЙ ЗНАК для u!
     double t = d3.Cross(d2) / cross1;
     double u = d3.Cross(d1) / cross1;
     
@@ -250,7 +249,7 @@ bool Polygon::Intersects(const Polygon& other) const {
         }
     }
     
-    // ИСПРАВЛЕННАЯ ПРОВЕРКА: проверяем ВСЕ вершины на вхождение
+    // проверяем ВСЕ вершины на вхождение
     for (size_t i = 0; i < other.vertices_.size(); ++i) {
         if (Contains(other.vertices_[i])) return true;
     }
@@ -269,7 +268,6 @@ double Polygon::Distance(const Polygon& other) const {
 
     double min_dist = PolygonUtils::INF;
     
-    // ОПТИМИЗАЦИЯ: только расстояния между ребрами
     // (DistanceToSegment уже включает расстояния до вершин)
     for (size_t i = 0; i < vertices_.size(); ++i) {
         Segment e1 = GetEdge(i);
